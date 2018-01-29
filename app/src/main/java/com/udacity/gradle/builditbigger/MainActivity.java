@@ -1,25 +1,19 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.androidlib.DisplayActivity;
-import com.example.lib.javaLib;
+import static com.udacity.gradle.builditbigger.R.*;
 
 
 public class MainActivity extends AppCompatActivity {
-Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
     }
 
 
@@ -44,19 +38,5 @@ Context context;
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void tellJoke(View view) {
-//        javaLib javaJoke=new javaLib();
-//        String javaText=javaJoke.tellAJoke();
-//        Intent intent = new Intent(this, DisplayActivity.class);
-//        intent.putExtra(DisplayActivity.JOKE_KEY, javaText);
-//        startActivity(intent);
-        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, ""));
-        //new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Manfred"));
-
-        //
-        //Toast.makeText(this, javaText, Toast.LENGTH_SHORT).show();
-    }
-
 
 }
