@@ -35,9 +35,7 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         mAdView.loadAd(adRequest);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                if (idlingResource != null) {
-                    idlingResource.setIdleState(true);
-                }
+
                 new EndpointsAsyncTask(getActivity(),MainActivityFragment.this).execute(new Pair<Context, String>(getActivity(), ""));
 
             } });
@@ -50,6 +48,9 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         Intent intent = new Intent(getActivity(), DisplayActivity.class);
         intent.putExtra(DisplayActivity.JOKE_KEY, result);
         getActivity().startActivity(intent);
+        if (idlingResource != null) {
+            idlingResource.setIdleState(true);
+        }
     }
 }
 
