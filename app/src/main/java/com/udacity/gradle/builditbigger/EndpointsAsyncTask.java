@@ -10,6 +10,8 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import java.io.IOException;
 
+import static com.udacity.gradle.builditbigger.MainActivity.idlingResource;
+
 /**
  * Created by ADMIN on 1/23/2018.
  */
@@ -17,8 +19,15 @@ import java.io.IOException;
 public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiJoke = null;
     private Context context;
-    public EndpointsAsyncTask(Context context){
+    private final returnListener listener;
+    public interface returnListener{
+        void onItemReturned(String result );
+    }
+    public EndpointsAsyncTask(Context context,returnListener listener){
+
         this.context=context;
+        this.listener=listener;
+
     }
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -35,6 +44,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
         try {
 
             return myApiJoke.sayHi().execute().getData();
+
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -42,8 +52,8 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
     @Override
     protected void onPostExecute(String result) {
-        Intent intent = new Intent(context, DisplayActivity.class);
-        intent.putExtra(DisplayActivity.JOKE_KEY, result);
-        context.startActivity(intent);
+        listener.onItemReturned(result);
+
+
     }
 }

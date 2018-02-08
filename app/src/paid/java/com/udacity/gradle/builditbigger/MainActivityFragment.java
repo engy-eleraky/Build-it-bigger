@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -9,7 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MainActivityFragment extends Fragment {
+import com.example.androidlib.DisplayActivity;
+
+import static com.udacity.gradle.builditbigger.MainActivity.idlingResource;
+
+public class MainActivityFragment extends Fragment implements EndpointsAsyncTask.returnListener {
     public MainActivityFragment() {
     }
 
@@ -22,11 +27,22 @@ public class MainActivityFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                new EndpointsAsyncTask(getActivity()).execute(new Pair<Context, String>(getActivity(), ""));
+                if (idlingResource != null) {
+                idlingResource.setIdleState(true);
+            }
+                new EndpointsAsyncTask(getActivity(),MainActivityFragment.this).execute(new Pair<Context, String>(getActivity(), ""));
 
             }
         });
         return root;
+
+    }
+
+    @Override
+    public void onItemReturned(String result) {
+        Intent intent = new Intent(getActivity(), DisplayActivity.class);
+        intent.putExtra(DisplayActivity.JOKE_KEY, result);
+        getActivity().startActivity(intent);
 
     }
 

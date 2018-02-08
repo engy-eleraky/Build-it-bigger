@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Pair;
@@ -9,13 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.androidlib.DisplayActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements EndpointsAsyncTask.returnListener{
 
     public MainActivityFragment() {
     }
@@ -32,12 +35,18 @@ public class MainActivityFragment extends Fragment {
         mAdView.loadAd(adRequest);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                new EndpointsAsyncTask(getActivity()).execute(new Pair<Context, String>(getActivity(), ""));
+                new EndpointsAsyncTask(getActivity(),MainActivityFragment.this).execute(new Pair<Context, String>(getActivity(), ""));
 
             } });
 
         return root;
     }
 
+    @Override
+    public void onItemReturned(String result) {
+        Intent intent = new Intent(getActivity(), DisplayActivity.class);
+        intent.putExtra(DisplayActivity.JOKE_KEY, result);
+        getActivity().startActivity(intent);
+    }
 }
 
