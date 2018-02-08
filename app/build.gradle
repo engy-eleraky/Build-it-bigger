@@ -42,13 +42,6 @@ android {
         dimension "tier"
         applicationId "com.udacity.gradle.builditbigger.paid"
     }
-//        minApi18 {
-//            dimension "minApi"
-//        }
-//        minApi23 {
-//            dimension "minApi"
-//
-//        }
 }
 
 }

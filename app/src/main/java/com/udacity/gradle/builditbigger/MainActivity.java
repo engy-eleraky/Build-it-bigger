@@ -14,13 +14,13 @@ import static com.udacity.gradle.builditbigger.R.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static SimpleIdlingResource idlingResource;
+   // public static SimpleIdlingResource idlingResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
-        getIdlingResource();
+       // getIdlingResource();
 
     }
 
@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @VisibleForTesting
-    @NonNull
-    public IdlingResource getIdlingResource() {
-        if (idlingResource == null) {
-            idlingResource = new SimpleIdlingResource();
-        }
-        return idlingResource;
-    }
+//    @VisibleForTesting
+//    @NonNull
+//    public IdlingResource getIdlingResource() {
+//        if (idlingResource == null) {
+//            idlingResource = new SimpleIdlingResource();
+//        }
+//        return idlingResource;
+//    }
 
 }

@@ -12,10 +12,11 @@ import android.widget.Button;
 
 import com.example.androidlib.DisplayActivity;
 
-import static com.udacity.gradle.builditbigger.MainActivity.idlingResource;
+//import static com.udacity.gradle.builditbigger.MainActivity.idlingResource;
 
-public class MainActivityFragment extends Fragment implements EndpointsAsyncTask.returnListener {
-    public MainActivityFragment() {
+    public class MainActivityFragment extends Fragment  {
+
+        public MainActivityFragment() {
     }
 
     @Override
@@ -28,7 +29,7 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
 
             public void onClick(View v) {
 
-                new EndpointsAsyncTask(getActivity(),MainActivityFragment.this).execute(new Pair<Context, String>(getActivity(), ""));
+                new EndpointsAsyncTask(getActivity()).execute();
 
             }
         });
@@ -36,14 +37,15 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
 
     }
 
-    @Override
-    public void onItemReturned(String result) {
-        Intent intent = new Intent(getActivity(), DisplayActivity.class);
-        intent.putExtra(DisplayActivity.JOKE_KEY, result);
-        getActivity().startActivity(intent);
-        if (idlingResource != null) {
-            idlingResource.setIdleState(true);
-        }
-    }
+//    @Override
+//    public void onItemReturned(String result) {
+//        Intent intent = new Intent(getActivity(), DisplayActivity.class);
+//        intent.putExtra(DisplayActivity.JOKE_KEY, result);
+//        getActivity().startActivity(intent);
+////        if (idlingResource != null) {
+////            idlingResource.setIdleState(true);
+////        }
+//
+//    }
 
 }

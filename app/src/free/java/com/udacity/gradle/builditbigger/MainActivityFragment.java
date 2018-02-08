@@ -18,7 +18,7 @@ import com.google.android.gms.ads.AdView;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements EndpointsAsyncTask.returnListener{
+public class MainActivityFragment extends Fragment{
 
     public MainActivityFragment() {
     }
@@ -36,21 +36,21 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
-                new EndpointsAsyncTask(getActivity(),MainActivityFragment.this).execute(new Pair<Context, String>(getActivity(), ""));
+                new EndpointsAsyncTask(getActivity()).execute();
 
             } });
 
         return root;
     }
 
-    @Override
-    public void onItemReturned(String result) {
-        Intent intent = new Intent(getActivity(), DisplayActivity.class);
-        intent.putExtra(DisplayActivity.JOKE_KEY, result);
-        getActivity().startActivity(intent);
-        if (idlingResource != null) {
-            idlingResource.setIdleState(true);
-        }
-    }
+//    @Override
+//    public void onItemReturned(String result) {
+//        Intent intent = new Intent(getActivity(), DisplayActivity.class);
+//        intent.putExtra(DisplayActivity.JOKE_KEY, result);
+//        getActivity().startActivity(intent);
+//        if (idlingResource != null) {
+//            idlingResource.setIdleState(true);
+//        }
+//    }
 }
 
